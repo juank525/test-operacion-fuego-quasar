@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 
+import com.mercadolibre.fuegoquasar.exception.LocationException;
 import com.mercadolibre.fuegoquasar.services.impl.LocationServiceImpl;
 
 public class LocationServiceImplTest {
@@ -30,5 +31,15 @@ public class LocationServiceImplTest {
 		double[] emitterCoordinates = locationServiceImpl.getLocation(positions, distances);
 
 		assertEquals(Arrays.asList(resultaExpect), Arrays.asList(emitterCoordinates));
+	}
+
+	@Test
+	public void getLocationErrorTest() {
+		// Kenobi , Skywalker, Sato
+		double positions[][] = { { -500, -200 }, { 100, -100 }, { 500, 100 } };
+		double distances[] = { 100.0 };
+		assertThrows(LocationException.class, () -> {
+			locationServiceImpl.getLocation(positions, distances);
+		});
 	}
 }

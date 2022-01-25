@@ -3,6 +3,7 @@ package com.mercadolibre.fuegoquasar.services.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 
 import com.mercadolibre.fuegoquasar.exception.InformationShipException;
@@ -21,10 +22,14 @@ public class ShipServicesImpl implements ShipServices {
 
 	private final MessageService messageService;
 
-	public ShipServicesImpl(LocationService locationService, MessageService messageService) {
+	private final SatelliteInitialPosition satelliteInitialPosition;
+
+	public ShipServicesImpl(LocationService locationService, MessageService messageService,
+			SatelliteInitialPosition satelliteInitialPosition) {
 		super();
 		this.locationService = locationService;
 		this.messageService = messageService;
+		this.satelliteInitialPosition = satelliteInitialPosition;
 	}
 
 	@Override
@@ -43,13 +48,14 @@ public class ShipServicesImpl implements ShipServices {
 		double[] distances = satellites.stream().map(Satellite::getDistance).collect(Collectors.toList()).stream()
 				.mapToDouble(Double::doubleValue).toArray();
 
-		if (distances == null)
+		if (ObjectUtils.isEmpty(distances))
 			throw new InformationShipException("No existe información de las distancias");
 
-		double[] location = locationService
-				.getLocation(SatelliteInitialPosition.getPositionInitialSatellite(satellites), distances);
+		double[][] positions = satelliteInitialPosition.getPositionInitialSatellites(satellites);
 
-		if (location == null)
+		double[] location = locationService.getLocation(positions, distances);
+
+		if (ObjectUtils.isEmpty(location))
 			throw new InformationShipException("No se puede obtener la posición");
 
 		return Position.builder().x(location[0]).y(location[1]).build();

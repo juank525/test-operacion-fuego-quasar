@@ -3,7 +3,7 @@ package com.mercadolibre.fuegoquasar.model;
 import java.io.Serializable;
 import java.util.List;
 
-public class SatelliteRequest implements Serializable {
+public class ShipRequest implements Serializable {
 	/**
 	 * 
 	 */

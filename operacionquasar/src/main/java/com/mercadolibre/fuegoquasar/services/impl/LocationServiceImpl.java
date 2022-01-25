@@ -13,11 +13,15 @@ public class LocationServiceImpl implements LocationService {
 
 	@Override
 	public double[] getLocation(double[][] positions, double[] distances) throws LocationException {
+		try {
+			TrilaterationFunction trilaterationFunction = new TrilaterationFunction(positions, distances);
+			NonLinearLeastSquaresSolver solver = new NonLinearLeastSquaresSolver(trilaterationFunction,
+					new LevenbergMarquardtOptimizer());
 
-		TrilaterationFunction trilaterationFunction = new TrilaterationFunction(positions, distances);
-		NonLinearLeastSquaresSolver solver = new NonLinearLeastSquaresSolver(trilaterationFunction,
-				new LevenbergMarquardtOptimizer());
+			return solver.solve().getPoint().toArray();
+		} catch (Exception e) {
+			throw new LocationException(e.getMessage());
+		}
 
-		return solver.solve().getPoint().toArray();
 	}
 }

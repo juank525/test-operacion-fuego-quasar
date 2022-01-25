@@ -12,7 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mercadolibre.fuegoquasar.model.SatelliteRequest;
+import com.mercadolibre.fuegoquasar.model.ShipRequest;
 import com.mercadolibre.fuegoquasar.model.ShipResponse;
 import com.mercadolibre.fuegoquasar.services.ShipServices;
 
@@ -35,7 +35,7 @@ public class ShipControllerTest {
 	@Test
 	void getInformationShipTest() {
 		when(issuingServices.getInformationShip(any())).thenReturn(shipResponse);
-		ResponseEntity<ShipResponse> responseActual = shipController.topSecret(new SatelliteRequest());
+		ResponseEntity<ShipResponse> responseActual = shipController.topSecret(new ShipRequest());
 		assertEquals(shipResponse.getMessage(), responseActual.getBody().getMessage());
 		assertEquals(200, responseActual.getStatusCodeValue());
 	}

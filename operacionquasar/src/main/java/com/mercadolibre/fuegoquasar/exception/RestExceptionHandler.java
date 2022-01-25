@@ -17,10 +17,19 @@ public class RestExceptionHandler {
 
 	@ExceptionHandler({ MessageException.class, LocationException.class, InformationShipException.class })
 	@ResponseBody
-	ResponseEntity<Object> handleBusinessException(Exception ex) {
+	ResponseEntity<Object> handleNotFound(Exception ex) {
 
 		ErrorResponse errorResponse = new ErrorResponse();
 		errorResponse.setMessage(ex.getMessage());
 		return ResponseEntity.notFound().build();
 	}
+
+	@ExceptionHandler({ BussinessException.class })
+	@ResponseBody
+	ResponseEntity<Object> handleBusinessException(Exception ex) {
+		ErrorResponse errorResponse = new ErrorResponse();
+		errorResponse.setMessage(ex.getMessage());
+		return ResponseEntity.badRequest().body(errorResponse);
+	}
+
 }

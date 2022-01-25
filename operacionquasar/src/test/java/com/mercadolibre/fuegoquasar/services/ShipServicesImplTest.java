@@ -19,6 +19,7 @@ import com.mercadolibre.fuegoquasar.model.Position;
 import com.mercadolibre.fuegoquasar.model.Satellite;
 import com.mercadolibre.fuegoquasar.model.ShipResponse;
 import com.mercadolibre.fuegoquasar.services.impl.ShipServicesImpl;
+import com.mercadolibre.fuegoquasar.util.SatelliteInitialPosition;
 
 public class ShipServicesImplTest {
 
@@ -27,6 +28,9 @@ public class ShipServicesImplTest {
 
 	@Mock
 	private MessageService messageService;
+
+	@Mock
+	private SatelliteInitialPosition satelliteInitialPosition;
 
 	@InjectMocks
 	private ShipServicesImpl shipServicesImpl;
@@ -65,6 +69,9 @@ public class ShipServicesImplTest {
 		when(locationService.getLocation(any(), any())).thenReturn(point);
 
 		when(messageService.getMessage(any())).thenReturn(message);
+
+		double[][] positions = { { -500, -200 }, { -100, -100 }, { 500, 100 } };
+		when(satelliteInitialPosition.getPositionInitialSatellites(any())).thenReturn(positions);
 
 		ShipResponse shipResponse = shipServicesImpl.getInformationShip(satellites);
 
