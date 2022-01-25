@@ -31,3 +31,8 @@ En las siguientes URL se puede consultar la documentación de los servicios
 Url de la colección de postman para realizar el consumo de los servicios
 
 - https://www.postman.com/redesposicionadas/workspace/test-mercado-libre/overview
+
+- Seleccionar el entorno "env-fuego-quasar-local":
+
+![image](https://user-images.githubusercontent.com/17581875/150932475-5fa6cda8-d489-4bf6-a7c1-2fd7555ef2e0.png)
+
