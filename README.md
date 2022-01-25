@@ -6,8 +6,5 @@ Para realizar la prueba se hizo necesario utilizar el algoritmo de trilateracion
 
 ### Arquitectura
 
-![image](https://user-images.githubusercontent.com/17581875/150808130-e3f146c4-1339-4cb3-835d-5b9405369b76.png)
-
-1. Creacion del proyecto en AWS
-2. Cliente se conecta a una API expuesta por medio de un ApiGateway
-3. ApiGateway ejecuta una funcion lambda construida con java 8 y spring boot
+1. Creacion del proyecto con java 8 y spring boot
+2. Carga de aplicacion en Heroku
