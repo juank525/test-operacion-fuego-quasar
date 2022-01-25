@@ -88,6 +88,12 @@
 				<configuration>
 					<source>11</source>
 					<target>11</target>
+					<archive>
+						<manifestEntries>
+							<Premain-Class>com.mercadolibre.fuegoquasar.NopPreMain</Premain-Class>
+						</manifestEntries>
+					</archive>
+
 				</configuration>
 			</plugin>
 		</plugins>
