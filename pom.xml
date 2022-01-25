@@ -12,6 +12,7 @@
 	<groupId>com.mercadolibre</groupId>
 	<artifactId>fuegoquasar</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>fuegoquasar</name>
 	<description>Reto ingreso mercado libre</description>
 	<properties>
